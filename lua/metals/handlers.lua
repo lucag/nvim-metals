@@ -35,13 +35,13 @@ M["metals/inputBox"] = function(_, result)
     args.default = result.value
   end
 
-  local name = vim.fn.input(args)
-
-  if name == "" then
-    return { cancelled = true }
-  else
-    return { value = name }
-  end
+  vim.ui.input(args, function(input)
+    if input == "" then
+      return { cancelled = true }
+    else
+      return { value = input }
+    end
+  end)
 end
 
 -- Implementation of the `metals/executeClientCommand` Metals LSP extension.
